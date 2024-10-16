@@ -12,7 +12,7 @@ import java.util.List;
 public class DataSnapshotsController {
     @Autowired
     private DataSnapshotsService dataSnapshotsService;
-    @CrossOrigin(origins = "http://localhost:3000")
+
     @GetMapping("/all")
     public List<Data_Snapshots> getAllDataSnapshots() {
         return dataSnapshotsService.getAllDataSnapshots();

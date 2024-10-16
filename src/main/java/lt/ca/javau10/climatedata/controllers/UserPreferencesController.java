@@ -12,7 +12,7 @@ import java.util.List;
 public class UserPreferencesController {
     @Autowired
     private UserPreferencesService userPreferencesService;
-    @CrossOrigin(origins = "http://localhost:3000")
+
     @GetMapping("/all")
     public List<User_Preferences> getAllPreferences() {
         return userPreferencesService.getAllUserPreferences();

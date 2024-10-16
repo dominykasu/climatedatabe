@@ -13,7 +13,7 @@ public class AlertsController {
     @Autowired
     private AlertsService alertsService;
 
-    @CrossOrigin(origins = "http://localhost:3000")
+
     @GetMapping("/all")
     public List<Alerts> getAllAlerts() {
         return alertsService.getAllAlerts();
