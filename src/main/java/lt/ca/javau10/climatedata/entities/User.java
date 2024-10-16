@@ -3,7 +3,9 @@ package lt.ca.javau10.climatedata.entities;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.Collection;
 import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "user")
@@ -17,20 +19,24 @@ public class User {
     private String email;
     @Column(nullable = false)
     private String password;
-    @CollectionTable(name = "roles", joinColumns = @JoinColumn(name = "user_id"))
-    @Column(name = "role")
-    private String role;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles = new HashSet<>();
     private final LocalDateTime created_at = LocalDateTime.now();
 
     public User() {
     }
 
-    public User(String username, String email, String password, String role) {
+    public User(String username, String email, String password) {
         this.username = username;
         this.email = email;
         this.password = password;
-        this.role = role;
+        this.roles = this.roles;
     }
+
+
 
     public Long getId() {
         return id;
@@ -60,15 +66,23 @@ public class User {
         this.password = password;
     }
 
-    public String getRole() {
-        return role;
+    public Set<Role> getRole() {
+        return roles;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setRole(Set<Role> role) {
+        this.roles = role;
     }
 
     public LocalDateTime getCreated_at() {
         return created_at;
+    }
+
+    public Collection<Role> getRoles() {
+        return roles;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

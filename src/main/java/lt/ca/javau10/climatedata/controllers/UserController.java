@@ -12,7 +12,7 @@ import java.util.List;
 public class UserController {
     @Autowired
     UserService climateService;
-
+    @CrossOrigin(origins = "http://localhost:3000")
     // Get all users (Read)
     @GetMapping("/all")
     public List<User> getAllUsers() {
