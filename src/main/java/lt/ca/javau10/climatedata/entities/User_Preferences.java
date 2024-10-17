@@ -6,6 +6,8 @@ import jakarta.persistence.*;
 @Table(name = "user_preferences")
 public class User_Preferences {
 
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -25,7 +27,9 @@ public class User_Preferences {
         this.preferred_metrics = preferred_metrics;
         this.time_range = time_range;
     }
-
+    public Long getId() {
+        return id;
+    }
     public User getUser() {
         return user;
     }
@@ -34,27 +38,27 @@ public class User_Preferences {
         this.user = user;
     }
 
-    public String getPreferred_region() {
+    public String getPreferredRegion() {
         return preferred_region;
     }
 
-    public void setPreferred_region(String preferred_region) {
+    public void setPreferredRegion(String preferred_region) {
         this.preferred_region = preferred_region;
     }
 
-    public String getPreferred_metrics() {
+    public String getPreferredMetrics() {
         return preferred_metrics;
     }
 
-    public void setPreferred_metrics(String preferred_metrics) {
+    public void setPreferredMetrics(String preferred_metrics) {
         this.preferred_metrics = preferred_metrics;
     }
 
-    public String getTime_range() {
+    public String getTimeRange() {
         return time_range;
     }
 
-    public void setTime_range(String time_range) {
+    public void setTimeRange(String time_range) {
         this.time_range = time_range;
     }
 }

@@ -20,7 +20,12 @@ public class UserPreferencesController {
 
     @PostMapping("/create")
     public User_Preferences createUserPreference(@RequestBody User_Preferences userPreference) {
-        return userPreferencesService.createUserPreference(userPreference);
+        return userPreferencesService.createUserPreference(
+                userPreference.getId(),
+                userPreference.getPreferredRegion(),
+                userPreference.getPreferredMetrics(),
+                userPreference.getTimeRange()
+        );
     }
 
     @GetMapping("/{id}")

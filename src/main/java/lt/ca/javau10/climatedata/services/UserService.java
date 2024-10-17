@@ -20,7 +20,7 @@ public class UserService implements UserDetailsService {
     private final EntityMapper entityMapper;
 
     @Autowired
-    private UserRepository userRepository;
+    private static UserRepository userRepository;
 
     public UserService(UserRepository userRepository, EntityMapper entityMapper) {
         this.userRepository = userRepository;
@@ -32,7 +32,7 @@ public class UserService implements UserDetailsService {
     }
 
     // Get a user by id
-    public User getUserById(Long id) {
+    public static User getUserById(Long id) {
         Optional<User> user = userRepository.findById(id);
         return user.orElse(null);  // Or throw a custom exception for not found.
     }

@@ -31,7 +31,7 @@ public class UserPreferencesServiceTests {
     @Test
     void getAllUserPreferencesTest() {
         // Arrange
-        User user = new User("username", "email", "password", "role");
+        User user = new User("username", "email", "password");
         User_Preferences pref1 = new User_Preferences(user, "region1", "metric1", "1h");
         User_Preferences pref2 = new User_Preferences(user, "region2", "metric2", "24h");
 
@@ -48,23 +48,23 @@ public class UserPreferencesServiceTests {
     @Test
     void createUserPreferenceTest() {
         // Arrange
-        User user = new User("username", "email", "password", "role");
-        User_Preferences preference = new User_Preferences(user, "region", "metric", "1h");
+        User user = new User("username", "email", "password");
+        User_Preferences preference = new User_Preferences(user,"region", "metric", "1h");
 
         when(userPreferencesRepository.save(any(User_Preferences.class))).thenReturn(preference);
 
         // Act
-        User_Preferences createdPreference = userPreferencesService.createUserPreference(preference);
+        User_Preferences createdPreference = userPreferencesService.createUserPreference(1L,"region", "metric", "1h");
 
         // Assert
         assertNotNull(createdPreference);
-        assertEquals("region", createdPreference.getPreferred_region());
+        assertEquals("region", createdPreference.getPreferredRegion());
         verify(userPreferencesRepository, times(1)).save(preference);
     }
     @Test
     void getUserPreferenceByIdTest() {
         // Arrange
-        User user = new User("username", "email", "password", "role");
+        User user = new User("username", "email", "password");
         User_Preferences preference = new User_Preferences(user, "region", "metric", "1h");
 
         when(userPreferencesRepository.findById(1L)).thenReturn(Optional.of(preference));
@@ -74,14 +74,14 @@ public class UserPreferencesServiceTests {
 
         // Assert
         assertNotNull(foundPreference);
-        assertEquals("region", foundPreference.getPreferred_region());
+        assertEquals("region", foundPreference.getPreferredRegion());
         verify(userPreferencesRepository, times(1)).findById(1L);
     }
 
     @Test
     void deleteUserPreferenceTest() {
         // Arrange
-        User user = new User("username", "email", "password", "role");
+        User user = new User("username", "email", "password");
         User_Preferences preference = new User_Preferences(user, "region", "metric", "1h");
 
         when(userPreferencesRepository.findById(1L)).thenReturn(Optional.of(preference));
