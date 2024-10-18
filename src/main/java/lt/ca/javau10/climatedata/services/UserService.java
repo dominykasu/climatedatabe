@@ -1,7 +1,10 @@
 package lt.ca.javau10.climatedata.services;
 
+import lt.ca.javau10.climatedata.entities.Role;
 import lt.ca.javau10.climatedata.repositories.UserRepository;
+import lt.ca.javau10.climatedata.repositories.RoleRepository;  // Add RoleRepository
 import lt.ca.javau10.climatedata.entities.User;
+import lt.ca.javau10.climatedata.entities.ERole;  // For enum role checking
 import lt.ca.javau10.climatedata.utils.EntityMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -10,8 +13,11 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+import java.util.HashSet;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -22,10 +28,14 @@ public class UserService implements UserDetailsService {
     @Autowired
     private static UserRepository userRepository;
 
+    @Autowired
+    private RoleRepository roleRepository;  // Add role repository
+
     public UserService(UserRepository userRepository, EntityMapper entityMapper) {
         this.userRepository = userRepository;
         this.entityMapper = entityMapper;
     }
+
     // Get all users
     public List<User> getAllUsers() {
         return userRepository.findAll();
@@ -42,15 +52,29 @@ public class UserService implements UserDetailsService {
         return userRepository.save(user);
     }
 
-    // Update an existing user
     public User updateUser(Long id, User updatedUser) {
         Optional<User> user = userRepository.findById(id);
         if (user.isPresent()) {
             User existingUser = user.get();
             existingUser.setUsername(updatedUser.getUsername());
             existingUser.setEmail(updatedUser.getEmail());
-            existingUser.setPassword(updatedUser.getPassword());
-            existingUser.setRole(updatedUser.getRole());
+
+            // Only update the password if it's provided
+            if (updatedUser.getPassword() != null && !updatedUser.getPassword().isEmpty()) {
+                existingUser.setPassword(updatedUser.getPassword());
+            }
+
+            // Handle the role update
+            Set<Role> updatedRoles = new HashSet<>();
+            for (Role role : updatedUser.getRole()) {
+                // Convert role name (String) to ERole enum
+                ERole roleEnum = ERole.valueOf(role.getName()); // Convert string to enum
+                Role existingRole = roleRepository.findByName(roleEnum)
+                        .orElseThrow(() -> new RuntimeException("Role not found: " + role.getName()));
+                updatedRoles.add(existingRole);
+            }
+            existingUser.setRole(updatedRoles);  // Assign fetched roles from DB
+
             return userRepository.save(existingUser);
         }
         return null;  // Or throw an exception if user not found
