@@ -11,35 +11,30 @@ import java.util.List;
 @RequestMapping("/users")
 public class UserController {
     @Autowired
-    UserService climateService;
+    UserService userService;
 
-    // Get all users (Read)
     @GetMapping("/all")
     public List<User> getAllUsers() {
-        return climateService.getAllUsers();
+        return userService.getAllUsers();
     }
 
-    // Get a single user by id (Read)
     @GetMapping("/{id}")
     public User getUserById(@PathVariable Long id) {
-        return climateService.getUserById(id);
+        return userService.getUserById(id);
     }
 
-    // Create a new user (Create)
     @PostMapping("/create")
     public User createUser(@RequestBody User user) {
-        return climateService.createUser(user);
+        return userService.createUser(user);
     }
 
-    // Update an existing user (Update)
     @PutMapping("/{id}")
     public User updateUser(@PathVariable Long id, @RequestBody User user) {
-        return climateService.updateUser(id, user);
+        return userService.updateUser(id, user);
     }
 
-    // Delete a user (Delete)
     @DeleteMapping("/{id}")
     public void deleteUser(@PathVariable Long id) {
-        climateService.deleteUser(id);
+        userService.deleteUser(id);
     }
 }

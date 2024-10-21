@@ -1,7 +1,11 @@
 package lt.ca.javau10.climatedata.controllers;
 
+import lt.ca.javau10.climatedata.entities.Data_Snapshots;
+import lt.ca.javau10.climatedata.entities.User;
 import lt.ca.javau10.climatedata.entities.User_Preferences;
+import lt.ca.javau10.climatedata.services.DataSnapshotsService;
 import lt.ca.javau10.climatedata.services.UserPreferencesService;
+import lt.ca.javau10.climatedata.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,7 +16,10 @@ import java.util.List;
 public class UserPreferencesController {
     @Autowired
     private UserPreferencesService userPreferencesService;
-
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private DataSnapshotsService dataSnapshotsService;
     @GetMapping("/all")
     public List<User_Preferences> getAllPreferences() {
         return userPreferencesService.getAllUserPreferences();
