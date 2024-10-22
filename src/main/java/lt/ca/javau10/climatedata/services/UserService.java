@@ -68,14 +68,15 @@ public class UserService implements UserDetailsService {
             }
 
             Set<Role> updatedRoles = new HashSet<>();
-            for (Role role : updatedUser.getRole()) {
-                // Convert role name (String) to ERole enum
-                ERole roleEnum = ERole.valueOf(role.getName()); // Convert string to enum
+            for (Role role : updatedUser.getRoles()) {
+
+                ERole roleEnum = ERole.valueOf(role.getName());
                 Role existingRole = roleRepository.findByName(roleEnum)
                         .orElseThrow(() -> new RuntimeException("Role not found: " + role.getName()));
                 updatedRoles.add(existingRole);
             }
-            existingUser.setRole(updatedRoles);  // Assign fetched roles from DB
+
+            existingUser.setRoles(updatedRoles);
 
             return userRepository.save(existingUser);
         }

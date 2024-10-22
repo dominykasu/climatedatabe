@@ -83,11 +83,10 @@ public class AuthService {
 
         checkUserExists(signUpRequest);
 
-
         User user = createNewUser(signUpRequest);
         Set<Role> roles = getInitialRoles(signUpRequest);
 
-        user.setRole(roles);
+        user.setRoles(roles);
 
         logger.info("Before: " + user.toString());
         user = userRepository.save(user);
