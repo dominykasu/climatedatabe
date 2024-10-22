@@ -1,5 +1,6 @@
 package lt.ca.javau10.climatedata.controllers;
 
+import jakarta.validation.Valid;
 import lt.ca.javau10.climatedata.payload.requests.LoginRequest;
 import lt.ca.javau10.climatedata.payload.requests.SignupRequest;
 import lt.ca.javau10.climatedata.payload.responses.JwtResponse;
@@ -31,7 +32,7 @@ public class AuthController {
     }
 
     @PostMapping("/signin")
-    public ResponseEntity<?> authenticateUser (@RequestBody LoginRequest loginRequest){
+    public ResponseEntity<?> authenticateUser (@Valid @RequestBody LoginRequest loginRequest){
         System.out.println("logger");
         logger.info(loginRequest.toString());
         JwtResponse jwtResponse = authService.authenticateUser(loginRequest);
@@ -39,13 +40,11 @@ public class AuthController {
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<?> registerUser(@RequestBody SignupRequest signUpRequest) {
-
+    public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
         try {
             MessageResponse response = authService.registerUser(signUpRequest);
             return ResponseEntity.ok(response);
         } catch (ResponseStatusException e) {
-
             return ResponseEntity.status(e.getStatusCode())
                     .body(new MessageResponse(e.getReason()));
         }
