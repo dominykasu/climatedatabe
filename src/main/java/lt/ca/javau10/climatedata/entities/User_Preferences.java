@@ -17,15 +17,11 @@ public class User_Preferences {
     private User user;
 
     private String preferred_region;
-    private String preferred_metrics;
-    private String time_range;
 
     public User_Preferences(){};
-    public User_Preferences(User user, String preferred_region, String preferred_metrics, String time_range) {
+    public User_Preferences(User user, String preferredRegion) {
         this.user = user;
-        this.preferred_region = preferred_region;
-        this.preferred_metrics = preferred_metrics;
-        this.time_range = time_range;
+        this.preferred_region = preferredRegion;
     }
     public Long getId() {
         return id;
@@ -46,19 +42,4 @@ public class User_Preferences {
         this.preferred_region = preferred_region;
     }
 
-    public String getPreferredMetrics() {
-        return preferred_metrics;
-    }
-
-    public void setPreferredMetrics(String preferred_metrics) {
-        this.preferred_metrics = preferred_metrics;
-    }
-
-    public String getTimeRange() {
-        return time_range;
-    }
-
-    public void setTimeRange(String time_range) {
-        this.time_range = time_range;
-    }
 }
