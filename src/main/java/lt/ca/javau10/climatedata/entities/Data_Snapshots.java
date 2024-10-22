@@ -30,7 +30,8 @@ public class Data_Snapshots {
 
     private LocalDate snapshotDate;
 
-    public Data_Snapshots() {}
+    public Data_Snapshots() {
+    }
 
     public Data_Snapshots(String region, String metric, List<Map<String, Object>> values, LocalDate snapshotDate, User user) {
         this.region = region;
@@ -48,7 +49,8 @@ public class Data_Snapshots {
         }
         try {
             ObjectMapper mapper = new ObjectMapper();
-            return mapper.readValue(this.valuesJson, new TypeReference<List<Map<String, Object>>>(){});
+            return mapper.readValue(this.valuesJson, new TypeReference<List<Map<String, Object>>>() {
+            });
         } catch (Exception e) {
             throw new RuntimeException("Failed to deserialize values from JSON: " + this.valuesJson, e);
         }
@@ -74,29 +76,5 @@ public class Data_Snapshots {
 
     public void setUser(User user) {
         this.user = user;
-    }
-
-    public String getRegion() {
-        return region;
-    }
-
-    public void setRegion(String region) {
-        this.region = region;
-    }
-
-    public String getMetric() {
-        return metric;
-    }
-
-    public void setMetric(String metric) {
-        this.metric = metric;
-    }
-
-    public LocalDate getSnapshotDate() {
-        return snapshotDate;
-    }
-
-    public void setSnapshotDate(LocalDate snapshotDate) {
-        this.snapshotDate = snapshotDate;
     }
 }

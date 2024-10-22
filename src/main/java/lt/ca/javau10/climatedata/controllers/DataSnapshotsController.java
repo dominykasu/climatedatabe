@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -35,15 +34,12 @@ public class DataSnapshotsController {
         List<Map<String, Object>> values = (List<Map<String, Object>>) payload.get("value");
         String username = (String) payload.get("username");
 
-
         User user = userService.getUserByUsername(username);
         if (user == null) {
             throw new IllegalArgumentException("User not found with username: " + username);
         }
 
-
         Data_Snapshots dataSnapshot = new Data_Snapshots(region, metric, values, LocalDate.now(), user);
-
 
         return dataSnapshotsService.createDataSnapshot(dataSnapshot);
     }

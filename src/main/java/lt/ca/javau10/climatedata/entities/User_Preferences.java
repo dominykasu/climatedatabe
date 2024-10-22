@@ -6,8 +6,6 @@ import jakarta.persistence.*;
 @Table(name = "user_preferences")
 public class User_Preferences {
 
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -32,14 +30,6 @@ public class User_Preferences {
 
     public void setUser(User user) {
         this.user = user;
-    }
-
-    public String getPreferredRegion() {
-        return preferred_region;
-    }
-
-    public void setPreferredRegion(String preferred_region) {
-        this.preferred_region = preferred_region;
     }
 
 }

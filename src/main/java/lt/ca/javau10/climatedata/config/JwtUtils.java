@@ -33,15 +33,6 @@ public class JwtUtils {
     private int jwtExpirationMs;
 
 
-    public void setSecretKey(String key) {
-        jwtSecret = key;
-    }
-
-    public void setExpirationMs(int ms) {
-        jwtExpirationMs = ms;
-    }
-
-
     public String generateJwtToken(Authentication authentication) {
 
         UserDto userPrincipal = (UserDto) authentication.getPrincipal();

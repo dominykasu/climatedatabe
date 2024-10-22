@@ -32,7 +32,6 @@ import lt.ca.javau10.climatedata.payload.responses.MessageResponse;
 
 import lt.ca.javau10.climatedata.repositories.UserRepository;
 
-
 @Service
 public class AuthService {
 
@@ -104,7 +103,6 @@ public class AuthService {
 
 
     private Set<Role> getInitialRoles(SignupRequest signUpRequest) {
-        logger.info("////");
         logger.info(signUpRequest.toString());
         Set<String> strRoles = signUpRequest.getRole();
         Set<Role> roles = new HashSet<>();

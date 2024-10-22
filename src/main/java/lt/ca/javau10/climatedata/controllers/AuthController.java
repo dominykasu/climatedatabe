@@ -14,14 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-//import lt.ca.javau9.payload.requests.LoginRequest;
-//import lt.ca.javau9.payload.requests.SignupRequest;
-//import lt.ca.javau9.payload.responses.JwtResponse;
-//import lt.ca.javau9.payload.responses.MessageResponse;
-import lt.ca.javau10.climatedata.config.JwtUtils;
 import lt.ca.javau10.climatedata.services.AuthService;
-
-
 
 @CrossOrigin
 @RestController
@@ -37,7 +30,6 @@ public class AuthController {
         this.authService = authService;
     }
 
-
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser (@RequestBody LoginRequest loginRequest){
         System.out.println("logger");
@@ -49,7 +41,6 @@ public class AuthController {
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@RequestBody SignupRequest signUpRequest) {
 
-
         try {
             MessageResponse response = authService.registerUser(signUpRequest);
             return ResponseEntity.ok(response);
@@ -59,7 +50,4 @@ public class AuthController {
                     .body(new MessageResponse(e.getReason()));
         }
     }
-
-
-
 }
