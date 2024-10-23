@@ -77,4 +77,22 @@ public class Data_Snapshots {
     public void setUser(User user) {
         this.user = user;
     }
+    public String getRegion() {
+        return region;
+    }
+    public void setRegion(String region) {
+        this.region = region;
+    }
+    public String getMetric() {
+        return metric;
+    }
+    public void setMetric(String metric) {
+        this.metric = metric;
+    }
+    public LocalDate getSnapshotDate() {
+        return snapshotDate;
+    }
+    public void setSnapshotDate(LocalDate snapshotDate) {
+        this.snapshotDate = snapshotDate;
+    }
 }

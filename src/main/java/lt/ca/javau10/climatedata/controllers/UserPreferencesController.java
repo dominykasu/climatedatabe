@@ -24,6 +24,9 @@ public class UserPreferencesController {
     @GetMapping("/all")
     public ResponseEntity<List<User_Preferences>> getAllPreferences(Principal principal) {
         User user = userService.getUserByUsername(principal.getName());
+        if (user == null) {
+            throw new IllegalArgumentException("User not found with username: " + principal.getName());
+        }
         List<User_Preferences> preferences = userPreferencesService.getUserPreferencesByUserId(user.getId());
         return ResponseEntity.ok(preferences);
     }

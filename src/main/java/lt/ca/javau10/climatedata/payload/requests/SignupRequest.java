@@ -20,6 +20,15 @@ public class SignupRequest {
 
     private Set<String> role;
 
+    public SignupRequest(String username, String email, String password) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+    }
+
+    public SignupRequest() {
+    }
+
     public String getUsername() {
         return username;
     }

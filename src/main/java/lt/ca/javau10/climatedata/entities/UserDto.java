@@ -40,6 +40,14 @@ public class UserDto implements UserDetails {
         this.roles = roles;
     }
 
+    public UserDto(User user) {
+    }
+
+    public UserDto(String username, String email, String password) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+    }
     public Long getId() {
         return id;
     }
@@ -63,7 +71,9 @@ public class UserDto implements UserDetails {
     public String getPassword() {
         return password;
     }
-
+    public void setPassword(String password) {
+        this.password = password;
+    }
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
 
@@ -109,5 +119,12 @@ public class UserDto implements UserDetails {
     }
 
 
+    public void setAuthorities(Set<Role> userRole) {
+        this.roles = userRole;
+    }
+
+    public void setEmail(String mail) {
+        this.email = mail;
+    }
 }
 

@@ -32,6 +32,12 @@ public class JwtUtils {
     @Value("${javau9.app.jwtExpirationMs}")
     private int jwtExpirationMs;
 
+    public void setSecretKey(String key) {
+        jwtSecret = key;
+    }
+    public void setExpirationMs(int ms) {
+        jwtExpirationMs = ms;
+    }
 
     public String generateJwtToken(Authentication authentication) {
 

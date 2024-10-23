@@ -13,9 +13,25 @@ public class Role {
     @Enumerated(EnumType.STRING)
     @Column(length = 20)
     private ERole name;
+    public Role() {
+
+    }
+    public Role(ERole name) {
+        this.name = name;
+    }
+
+    public Role(String roleUser) {
+    }
 
     public String getName() {
         return name.toString();
     }
 
+    public void setName(ERole eRole) {
+        this.name = eRole;
+    }
+
+    public void setId(long l) {
+        this.id = l;
+    }
 }

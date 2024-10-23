@@ -10,6 +10,14 @@ public class LoginRequest {
     @NotBlank(message = "Password is mandatory")
     private String password;
 
+    public LoginRequest(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+
+    public LoginRequest() {
+    }
+
     // Getters and setters
     public String getUsername() {
         return username;
