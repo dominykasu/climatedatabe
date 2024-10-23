@@ -27,7 +27,12 @@ public class User_Preferences {
     public User getUser() {
         return user;
     }
-
+    public String getPreferredRegion() {
+        return preferred_region;
+    }
+    public void setPreferredRegion(String preferred_region) {
+        this.preferred_region = preferred_region;
+    }
     public void setUser(User user) {
         this.user = user;
     }
